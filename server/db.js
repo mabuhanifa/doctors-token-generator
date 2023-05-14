@@ -1,5 +1,4 @@
-const { Pool } = require("pg");
-
+const { Pool, Client } = require("pg");
 require("dotenv").config();
 
 //creating connection to database
@@ -9,7 +8,16 @@ const pool = new Pool({
   host: process.env.HOST,
   port: process.env.PORT,
   database: process.env.DATABASE,
-  ssl:`true`,
+  ssl: `true`,
 });
+
+(async () => {
+  try {
+    await pool.connect();
+    console.log("Postgresql is connected");
+  } catch (error) {
+    console.log(error);
+  }
+})();
 
 module.exports = pool;

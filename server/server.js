@@ -7,12 +7,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/api", (req, res) => {
-  console.log(req.body);
-  res.send({
-    message: 'successfully subscribed',
-    success: true,
-  });
+app.get("/api", async(req, res) => {
+  try {
+    const user = await pool.query("SELECT * FROM employee");
+    res.status(201).json({
+      message: `success`,
+      data: user.rows,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.listen(port, () => {
