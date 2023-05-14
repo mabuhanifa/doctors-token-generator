@@ -9,7 +9,7 @@ app.use(cors());
 
 app.get("/api", async(req, res) => {
   try {
-    const user = await pool.query("SELECT * FROM employee");
+    const user = await pool.query("SELECT * FROM clients");
     res.status(201).json({
       message: `success`,
       data: user.rows,
