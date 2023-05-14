@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/api", async(req, res) => {
+app.get("/clients", async(req, res) => {
   try {
     const user = await pool.query("SELECT * FROM clients");
     res.status(201).json({
